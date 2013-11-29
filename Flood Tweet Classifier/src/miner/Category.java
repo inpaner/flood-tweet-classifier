@@ -37,17 +37,15 @@ public enum Category {
     public static String cleanUp(String text) {
         String result = text.toLowerCase();
         
-        text.replace("#reliefph", "");
-        text.replace("#rescueph", "");
-        text.replace("#safenow", "");
-        text.replace("#floodph", "");
-        text.replace("#tracingph", "");
-        text.replace("#yolandaph", "");
+        result = result.replace("#reliefph", "");
+        result = result.replace("#rescueph", "");
+        result = result.replace("#safenow", "");
+        result = result.replace("#floodph", "");
+        result = result.replace("#tracingph", "");
+        result = result.replace("#yolandaph", "");
         
         return result;
     }
-    
-    
     
     public static int countCategories(String text) {
         int result = 0;

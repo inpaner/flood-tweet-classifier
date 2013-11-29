@@ -21,7 +21,7 @@ public class DataManager {
             " VALUES (?, ?, ?, ?, ?, ?) ";
     
     private static final String SQL_RETRIEVE = 
-            "SELECT (id, username, text, date, latitude, longitude) " +
+            "SELECT id, username, text, date, latitude, longitude " +
             " FROM Tweet ";
     
     public List<Tweet> retrieveAll() {
@@ -33,9 +33,12 @@ public class DataManager {
         try {
             conn = factory.getConnection();
             ps = DAOUtil.prepareStatement(conn, SQL_RETRIEVE, false, values);
+            
             rs = ps.executeQuery();
+            
             while (rs.next()) {
-                
+                Tweet tweet = map(rs);
+                result.add(tweet);
             }
         }
         catch (SQLException e) {
@@ -79,5 +82,24 @@ public class DataManager {
         finally {
             DAOUtil.close(conn, ps);
         }
+    }
+    
+    private Tweet map(ResultSet rs) {
+        Tweet result = null;
+        try {
+            result = new Tweet(
+                rs.getLong("id"),
+                rs.getString("username"),
+                rs.getString("text"),
+                rs.getString("date"),
+                rs.getString("latitude"),
+                rs.getString("longitude")
+            );
+        }
+        catch (SQLException e) {
+            e.printStackTrace();
+        }
+        
+        return result;
     }
 }

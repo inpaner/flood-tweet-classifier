@@ -17,6 +17,18 @@ public class Tweet {
         this.latitude = latitude;
         this.longitude = longitude;
     }
+    
+    public Tweet(long id, String username, String text, 
+                String date, String latitude, String longitude) {
+        this(id, username, text, date, (Double) null, (Double) null);
+        
+        if (!latitude.isEmpty()) {
+            this.latitude = Double.valueOf(latitude);
+        }
+        if (!longitude.isEmpty()) {
+            this.longitude = Double.valueOf(longitude);
+        }
+    }
 
     public String getUsername() {
         return username;
@@ -24,6 +36,10 @@ public class Tweet {
     
     public String getText() {
         return text;
+    }
+    
+    public String getCleanText() {
+        return Category.cleanUp(text);
     }
     
     public String getDate() {
@@ -38,4 +54,12 @@ public class Tweet {
         return longitude;
     }
         
+    public Category getCategory() {
+        return Category.extract(text);
+    }
+    
+    public boolean isSingleCategory() {
+        int count = Category.countCategories(text);
+        return count == 1;
+    }
 }
