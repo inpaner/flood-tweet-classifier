@@ -1,14 +1,30 @@
 package tweet;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public enum Category {
-    RELIEF("Relief"), 
-    RESCUE("Rescue"), 
-    SAFENOW("SafeNow"), 
-    FLOOD("Flood"), 
-    TRACING("Tracing"), 
-    YOLANDA("Yolanda");
+    RELIEF("relief"), 
+    RESCUE("rescue"), 
+    SAFENOW("safenow"), 
+    FLOOD("flood"), 
+    TRACING("tracing"), 
+    YOLANDA("yolanda");
     
-    public static Category extract(String text) {
+    private static List<String> values;
+    
+    static {
+        values = new ArrayList<>();
+        for (Category category : Category.class.getEnumConstants()) {
+            values.add(category.name);
+        }    
+    }
+    
+    public static List<String> getValues() {
+        return values;
+    }
+    
+    static Category extract(String text) {
         Category result = null;
         text = text.toLowerCase();
         
@@ -34,7 +50,7 @@ public enum Category {
         return result;
     }
     
-    public static String cleanUp(String text) {
+    static String cleanUp(String text) {
         String result = text.toLowerCase();
         
         result = result.replace("#reliefph", "");
@@ -47,10 +63,9 @@ public enum Category {
         return result;
     }
     
-    public static int countCategories(String text) {
+    static int countCategories(String text) {
         int result = 0;
         text = text.toLowerCase();
-        
         if (text.contains("#reliefph")) {
             result++;
         }
