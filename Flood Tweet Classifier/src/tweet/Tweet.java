@@ -1,4 +1,4 @@
-package miner;
+package tweet;
 
 public class Tweet {
     private long id;

@@ -1,4 +1,4 @@
-package miner;
+package tweet;
 
 public enum Category {
     RELIEF("Relief"), 

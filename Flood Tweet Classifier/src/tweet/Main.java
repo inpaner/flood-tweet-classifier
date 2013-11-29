@@ -1,4 +1,4 @@
-package miner;
+package tweet;
 
 import java.util.List;
 

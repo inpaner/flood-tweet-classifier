@@ -1,4 +1,4 @@
-package miner;
+package tweet;
 
 /*
  * Copyright 2007 Yusuke Yamamoto
