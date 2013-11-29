@@ -12,5 +12,6 @@
 			<attribute name="javadoc_location" value="jar:file:/D:/Dropbox/Programming/Commons/sqlite-jdbc/sqlite-jdbc-3.7.2-javadoc.jar!/"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="weka.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
