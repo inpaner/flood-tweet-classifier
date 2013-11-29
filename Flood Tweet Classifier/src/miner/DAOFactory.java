@@ -17,7 +17,7 @@ public class DAOFactory {
 
     // Constants ----------------------------------------------------------------------------------
 
-    private final String url = "jdbc:sqlite:data/tweets.db";
+    private final String url = "jdbc:sqlite:data/Tweets.db";
 
     // Actions ------------------------------------------------------------------------------------
 
