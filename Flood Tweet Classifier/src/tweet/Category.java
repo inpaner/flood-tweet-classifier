@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public enum Category {
-    RELIEF("relief"), 
-    RESCUE("rescue"), 
+    RELIEF("reliefph"), 
+    RESCUE("rescueph"), 
     SAFENOW("safenow"), 
-    FLOOD("flood"), 
-    TRACING("tracing"), 
-    YOLANDA("yolanda");
+    FLOOD("floodph"), 
+    TRACING("tracingph"), 
+    YOLANDA("yolandaph");
     
     private static List<String> values;
     
