@@ -9,10 +9,10 @@ import java.util.List;
 
 import twitter4j.Status;
 
-public class DataManager {
+public class TweetManager {
     DAOFactory factory;
     
-    public DataManager() {
+    public TweetManager() {
         factory = DAOFactory.getInstance();
     }
     
