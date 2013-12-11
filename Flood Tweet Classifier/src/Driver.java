@@ -12,8 +12,8 @@ import twitter4j.Status;
 public class Driver {
     public static void main(String[] args) {
         Driver main = new Driver();
-        //main.mine("YolandaPH");
-        //main.retrieveTest();
+        //main.mine("#YolandaPH");
+        main.retrieveTest();
     }
     
     /* The code that queries from db then calls the converter to produce the desired arff file*/
@@ -22,7 +22,10 @@ public class Driver {
          List<Tweet> tweets = manager.retrieveAll();
          try{
          	TweetToBagOfWordsConverter.createBagOfWordsARFF(tweets, "BagOfWords.arff");
-         }catch(Exception e){e.printStackTrace();}
+         }
+         catch(Exception e) {
+             e.printStackTrace();
+         }
     }
     
     private void mine(String toSearch) {
@@ -39,7 +42,7 @@ public class Driver {
         for (Tweet tweet : tweets) {
             if (!tweet.isSingleCategory())
                 continue;
-            System.out.println(tweet.getCategory() + "," + tweet.getCleanText());
+            //System.out.println(tweet.getCategory() + "," + tweet.getCleanText());
             count++;
         }
         System.out.println(count);
