@@ -13,7 +13,8 @@ public class Driver {
     public static void main(String[] args) {
         Driver main = new Driver();
         //main.mine("#YolandaPH");
-        main.retrieveTest();
+        //main.retrieveTest();
+        main.generateBOWSARFF();
     }
     
     /* The code that queries from db then calls the converter to produce the desired arff file*/
@@ -21,7 +22,7 @@ public class Driver {
     	 TweetManager manager = new TweetManager();
          List<Tweet> tweets = manager.retrieveAll();
          try{
-         	TweetToBagOfWordsConverter.createBagOfWordsARFF(tweets, "BagOfWords.arff");
+         	TweetToBagOfWordsConverter.createBagOfWordsARFF(tweets, "BagOfWordsIvan.arff");
          }
          catch(Exception e) {
              e.printStackTrace();
