@@ -12,9 +12,9 @@ import twitter4j.Status;
 public class Driver {
     public static void main(String[] args) {
         Driver main = new Driver();
-        //main.mine("#YolandaPH");
+        main.mine("#voteph");
         //main.retrieveTest();
-        main.generateBOWSARFF();
+        // main.generateBOWSARFF();
     }
     
     /* The code that queries from db then calls the converter to produce the desired arff file*/

@@ -30,16 +30,16 @@ import java.util.List;
  * @since Twitter4J 2.1.7
  */
 public class Miner {
-
+	public static final int SEARCH_COUNT = 100;
+	public static final String SEARCH_SINCE = "2015-10-01"; 
+//	 public static final String SEARCH_SINCE = "";
+	 public static final String SEARCH_UNTIL = "2015-10-13";
+//	 public static final String SEARCH_UNTIL = "";
+	
     public static final String CONSUMER_KEY = "fwbtkGf8N97yyUZyH5YzLw";
     public static final String CONSUMER_SECRET = "oQA5DunUy89Co5Hr7p4O2WmdzqiGTzssn2kMphKc8g";
     public static final String OAUTH_ACCESS_TOKEN = "461053984-aww1IbpSVcxUE2jN8VqsOkEw8IQeEMusx4IdPM9p";
     public static final String OAUTH_ACCESS_TOKEN_SECRET = "WGsbat8P8flqKqyAymnWnTnAGI5hZkgdaQSE8XALs7ZEp";
-    
-    public static void main(String[] args) {
-        Miner miner = new Miner();
-        miner.mine("ReliefPH");
-    }
     
     
     /**
@@ -60,7 +60,14 @@ public class Miner {
  
         try {           
             Query query = new Query(toSearch);
-            query.setCount(100);
+            query.setCount(SEARCH_COUNT);
+            if (!SEARCH_SINCE.isEmpty()) {
+            	query.setSince(SEARCH_SINCE);
+            } 
+            if (!SEARCH_UNTIL.isEmpty()) {
+            	query.setUntil(SEARCH_UNTIL);
+            }
+            
             QueryResult result;
             do {
                 result = twitter.search(query);
