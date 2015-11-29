@@ -12,6 +12,9 @@ import twitter4j.Status;
 public class TweetManager {
     DAOFactory factory;
     
+    private final int COUNT_INTERVAL_TO_PRINT = 100;
+    private final int START_FROM_COUNT = 57000;
+    
     public TweetManager() {
         factory = DAOFactory.getInstance();
     }
@@ -20,9 +23,15 @@ public class TweetManager {
             "INSERT INTO Tweet(id, username, text, date, latitude, longitude) " +
             " VALUES (?, ?, ?, ?, ?, ?) ";
     
+    private static final String SQL_UPDATE = 
+            "UPDATE Tweet " +
+    		"SET text = ? " +
+    		"WHERE id = ? ";
+    
     private static final String SQL_RETRIEVE = 
             "SELECT id, username, text, date, latitude, longitude " +
             " FROM Tweet ";
+    
     
     public List<Tweet> retrieveAll() {
         List<Tweet> result = new ArrayList<>();
@@ -83,6 +92,41 @@ public class TweetManager {
             DAOUtil.close(conn, ps);
         }
     }
+    
+    public void removeNewlinesFromText(List<Tweet> tweets) {        
+        Connection conn = null;
+        PreparedStatement ps = null;
+        try {
+            conn = factory.getConnection();
+            int count = 0;
+            System.out.println("starting replacement");
+            for (Tweet tweet : tweets) {
+            	count++;
+            	if (count < START_FROM_COUNT) {
+            		continue;
+            	}
+            	
+                tweet.removeNewlinesFromText();
+                Object[] values = {
+                        tweet.getText(),
+                		tweet.getId()
+                };
+                ps = DAOUtil.prepareStatement(conn, SQL_UPDATE, false, values);
+                ps.executeUpdate();
+                
+                if (count % COUNT_INTERVAL_TO_PRINT == 0) {
+                	System.out.println(count);
+                }
+            }
+        }
+        catch (SQLException e) {
+            System.err.println(e.getMessage());
+        }
+        finally {
+            DAOUtil.close(conn, ps);
+        }
+    }
+    
     
     private Tweet map(ResultSet rs) {
         Tweet result = null;

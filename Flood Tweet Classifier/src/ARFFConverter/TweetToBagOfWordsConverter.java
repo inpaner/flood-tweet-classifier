@@ -38,7 +38,7 @@ public class TweetToBagOfWordsConverter {
 		LovinsStemmer stemmer = new LovinsStemmer (); 
 		stringToWordVectorFilter.setStemmer(stemmer); 
 		stringToWordVectorFilter.setMinTermFreq(5); 
-		stringToWordVectorFilter.setWordsToKeep(500); 
+		stringToWordVectorFilter.setWordsToKeep(1000); 
 
 		return Filter.useFilter(dataset, stringToWordVectorFilter); 
     }
@@ -73,10 +73,10 @@ public class TweetToBagOfWordsConverter {
         // Create the instance
   
         for(Tweet tweet: tweets){
-        	if(tweet != null && tweet.getCategory() != null){
+        	if (tweet != null && tweet.getCategory() != null) {
 	        	Instance iExample = new Instance(2);
 	        	//System.out.println(tweet.getCategory()+" -=- \""+tweet.getCleanText()+"\"");
-	        	iExample.setValue(trainingSet.attribute(0) , tweet.getCategory().toString());
+	        	iExample.setValue(trainingSet.attribute(0) , tweet.getCategory());
 	        	iExample.setValue(trainingSet.attribute(1) , tweet.getCleanText());
 	
 	        	trainingSet.add(iExample);
@@ -88,7 +88,7 @@ public class TweetToBagOfWordsConverter {
     
     // Creates the attributes for the arff. (ALWAYS makes classification attribute as first attribute (index 0) ) 
     private static FastVector createTweetAttributes(){
-    	String[] classificationValues = {"reliefph" , "rescueph", "safenow", "floodph", "tracingph", "yolandaph"};
+    	String[] classificationValues = {"positive" , "negative", "neutral"};
     	
     
         // Declare the class attribute along with its values
@@ -101,6 +101,7 @@ public class TweetToBagOfWordsConverter {
         Attribute textAttribute = new Attribute("text", (FastVector)null);
 
         // Declare the feature vector
+//        FastVector attributes = new FastVector(1);
         FastVector attributes = new FastVector(2);
         attributes.addElement(classificationAttribute);    
         attributes.addElement(textAttribute);    
