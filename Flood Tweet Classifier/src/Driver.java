@@ -107,6 +107,8 @@ public class Driver {
     	
     	return tweets;
     }
+    
+    
     private void mine(String toSearch) {
         Miner miner = new Miner();
         List<Status> tweets = miner.mine(toSearch);
